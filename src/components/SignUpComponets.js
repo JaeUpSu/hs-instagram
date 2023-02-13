@@ -15,7 +15,7 @@ export const SignUpBox = styled.div`
   background-color: ${(props) => props.theme.boxColor};
   border: 1px solid rgb(219, 219, 219);
   height: 100%;
-  max-height: 520px;
+  max-height: 570px;
 `;
 export const Title = styled.h1`
   color: ${(props) => props.theme.fontColor};
@@ -31,7 +31,10 @@ export const SubTitle = styled.p`
   margin-top: 20px;
   font-weight: 400;
   font-size: 14px;
+  max-width: 255px;
 `;
+
+export const info = styled(SubTitle)``;
 
 export const Form = styled.form`
   display: flex;
@@ -154,6 +157,7 @@ export const LoginLink = styled.a`
     color: #2784a5;
   }
 `;
+export const more = styled(LoginLink)``;
 
 export const ModeBox = styled.div`
   display: flex;

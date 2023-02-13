@@ -38,6 +38,11 @@ function SignUp() {
             <SignUpComponents.Input type="text" placeholder="성명" />
             <SignUpComponents.Input type="text" placeholder="사용자 이름" />
             <SignUpComponents.Input type="password" placeholder="비밀번호" />
+            <SignUpComponents.info>
+              저희 서비스를 이용하는 사람이 회원님의 연락처 정보를 instagram 에
+              업로드했을 수도 있습니다.
+              <SignUpComponents.more>더 알아보기</SignUpComponents.more>
+            </SignUpComponents.info>
             <SignUpComponents.Button type="submit" value="가입" />
           </SignUpComponents.Form>
         </SignUpComponents.SignUpBox>
