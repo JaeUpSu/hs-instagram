@@ -37,23 +37,34 @@ const FeedHeader = styled.div`
   padding: 10px;
   justify-content: space-between;
   padding-right: 20px;
+  & > svg {
+    cursor: pointer;
+  }
 `;
 const LeftBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-const FeedHeaderLeftBox = styled(LeftBox)``;
+const FeedHeaderLeftBox = styled(LeftBox)`
+  & > div {
+    cursor: pointer;
+  }
+  & > p {
+    cursor: pointer;
+  }
+`;
 const FeedActionsLeftBox = styled(LeftBox)`
   & > svg {
     margin-left: 20px;
+    cursor: pointer;
   }
 `;
 const ProfileImg = styled.div`
   border-radius: 50%;
   border: 1px solid ${(props) => props.theme.borderColor};
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   background-image: url(https://cdn.eyesmag.com/content/uploads/sliderImages/2021/07/19/005-d020cb23-f09f-4f55-bfca-b2540f194ea2.jpg);
   background-size: cover;
   background-position: center;
@@ -63,7 +74,7 @@ const ProfileNick = styled.p`
   transform: translateY(-15%);
   font-weight: bold;
 `;
-const Time = styled.p`
+const Time = styled.span`
   font-size: 10px;
   margin-left: 15px;
   transform: translateY(-10%);
@@ -83,6 +94,9 @@ const FeedActions = styled.div`
   align-items: center;
   justify-content: space-between;
   padding-right: 20px;
+  & > svg {
+    cursor: pointer;
+  }
 `;
 
 const Likes = styled.div`
