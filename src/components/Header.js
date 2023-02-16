@@ -19,7 +19,7 @@ const HeaderContainer = styled.header`
 
 const Wrapper = styled.div`
   width: 100%;
-  max-width: 930px;
+  padding-right: 35px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,6 +29,7 @@ const Column = styled.div``;
 
 const Icon = styled.span`
   margin: 0px 10px;
+  margin-right: 15px;
   cursor: pointer;
   &:nth-child(1) {
     margin-left: 20px;
