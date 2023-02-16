@@ -6,6 +6,7 @@ export const lightTheme = {
   boxColor: "#ffffff",
   inputColor: "#fcfcfc",
   bgColor: "#fafafa",
+  borderColor: "#9a9a9a",
 };
 
 export const darkTheme = {
@@ -13,6 +14,7 @@ export const darkTheme = {
   boxColor: "#111111",
   inputColor: "#333333",
   bgColor: "#333333",
+  borderColor: "#9a9a9a",
 };
 
 export const GlobalStyles = createGlobalStyle`

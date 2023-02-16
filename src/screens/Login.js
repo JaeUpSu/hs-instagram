@@ -1,4 +1,4 @@
-import { darkModeVar } from "apollo";
+import { darkModeVar, isLoggedInVar } from "apollo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -12,6 +12,12 @@ import routes from "routes";
 import * as LoginComponents from "components/LoginComponets";
 
 function Login() {
+  const onSubmit = (event) => {
+    event.preventDefault();
+    isLoggedInVar(true);
+    console.log("login click");
+  };
+
   return (
     <LoginComponents.Container>
       <LoginComponents.Wrapper>
@@ -20,7 +26,7 @@ function Login() {
             Instagram{"   "}
             <FontAwesomeIcon icon={faInstagram} />
           </LoginComponents.Title>
-          <LoginComponents.Form>
+          <LoginComponents.Form onSubmit={onSubmit}>
             <LoginComponents.Input
               type="email"
               placeholder="전화번호, 사용자 이름 또는 이메일"

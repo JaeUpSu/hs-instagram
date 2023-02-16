@@ -13,8 +13,11 @@ import { ThemeProvider } from "styled-components";
 import { useReactiveVar } from "@apollo/client";
 import { isLoggedInVar, darkModeVar } from "./apollo";
 import { lightTheme, darkTheme, GlobalStyles } from "./styles";
+import Header from "components/Header";
+import Layout from "components/Layout";
 
 function App() {
+  // 전역 선언
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   const darkMode = useReactiveVar(darkModeVar);
 
@@ -25,7 +28,15 @@ function App() {
         <Routes>
           <Route
             path={routes.home}
-            element={isLoggedIn ? <Home /> : <Login />}
+            element={
+              isLoggedIn ? (
+                <Layout>
+                  <Home />
+                </Layout>
+              ) : (
+                <Login />
+              )
+            }
           />
           <Route path={routes.profile} element={<Profile />} />
           <Route
