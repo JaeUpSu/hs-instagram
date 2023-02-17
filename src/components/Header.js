@@ -1,16 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import {
-  faPaperPlane,
-  faHome,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+
+import { faPaperPlane, faUser } from "@fortawesome/free-regular-svg-icons";
 
 const HeaderContainer = styled.header`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 11px 0;
 
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
@@ -19,7 +18,8 @@ const HeaderContainer = styled.header`
 
 const Wrapper = styled.div`
   width: 100%;
-  padding-right: 35px;
+  max-width: 600px;
+  padding-right: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,10 +29,10 @@ const Column = styled.div``;
 
 const Icon = styled.span`
   margin: 0px 10px;
-  margin-right: 15px;
+  margin-left: 15px;
   cursor: pointer;
   &:nth-child(1) {
-    margin-left: 20px;
+    margin-left: 10px;
   }
 `;
 

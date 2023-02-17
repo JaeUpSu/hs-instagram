@@ -1,10 +1,5 @@
 import styled from "styled-components";
-import {
-  // faHeart,
-  // faComment,
-  // faPaperPlane,
-  faEllipsis,
-} from "@fortawesome/free-solid-svg-icons";
+import * as Solid from "@fortawesome/free-solid-svg-icons";
 import {
   faComment,
   faHeart,
@@ -17,21 +12,22 @@ import jibri from "../images/jibri.jpg";
 const FeedContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
-  max-width: 600px;
-  max-height: 900px;
+  width: 600px;
+  max-height: 830px;
+
   margin: 0 auto;
 
   border: 1px solid ${(props) => props.theme.borderColor};
+  border-radius: 3px;
 `;
 const FeedHeader = styled.div`
   width: 100%;
   height: 100%;
+  border-radius: 3px;
   max-height: 60px;
   background-color: white;
-  border: 1px solid ${(props) => props.theme.borderColor};
   display: flex;
   align-items: center;
   padding: 10px;
@@ -107,15 +103,46 @@ const Likes = styled.div`
 `;
 const Comments = styled.p`
   width: 100%;
-  height: 100px;
-  padding: 10px 20px;
+  padding: 0 20px;
+  padding-top: 5px;
   font-size: 12px;
 `;
 const Replys = styled.div`
   font-size: 13px;
   color: #666666;
   width: 100%;
-  padding: 10px 20px;
+  padding: 5px 20px;
+  padding-bottom: 15px;
+`;
+
+const ReplysLine = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  div {
+    width: 100%;
+    height: 1px;
+    background-color: lightgray;
+    margin: 10px 0;
+  }
+`;
+
+const ReplysInputBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ReplysInputProfile = styled(ProfileImg)`
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+`;
+const ReplysEnterBtn = styled.button`
+  background: transparent;
+  border: 0px;
+  width: 50px;
+  color: #2493ff;
+  cursor: pointer;
 `;
 
 function Home() {
@@ -127,12 +154,18 @@ function Home() {
           <ProfileNick>HyeonSu</ProfileNick>
           <Time>5 분전</Time>
         </FeedHeaderLeftBox>
-        <FontAwesomeIcon size="2x" icon={faEllipsis} />
+        <FontAwesomeIcon size="2x" icon={Solid.faEllipsis} />
       </FeedHeader>
       <FeedPhoto />
       <FeedActions>
         <FeedActionsLeftBox>
-          <FontAwesomeIcon size="2x" icon={faHeart} />
+          <FontAwesomeIcon
+            style={{
+              color: true ? "tomato" : "inherit",
+            }}
+            size="2x"
+            icon={faHeart}
+          />
           <FontAwesomeIcon size="2x" icon={faComment} />
           <FontAwesomeIcon size="2x" icon={faPaperPlane} />
         </FeedActionsLeftBox>
@@ -157,7 +190,21 @@ function Home() {
         검사에게 연락해 '삼성생명 관련 부분은 예민하니 빼 달라. 최 변호사
         요청이다'라고 말했다"고 보도했다.
       </Comments>
-      <Replys>댓글 95개 모두 보기</Replys>
+      <Replys>
+        댓글 95개 모두 보기{" "}
+        <ReplysLine>
+          <div />
+        </ReplysLine>
+        <ReplysInputBox>
+          <ReplysInputProfile />
+          <input
+            style={{ width: "100%" }}
+            type="text"
+            placeholder="Write a comment ..."
+          />
+          <ReplysEnterBtn>게시</ReplysEnterBtn>
+        </ReplysInputBox>
+      </Replys>
     </FeedContainer>
   );
 }
