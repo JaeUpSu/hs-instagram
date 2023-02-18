@@ -5,4 +5,8 @@ export const thumbItems = [
   "https://i1.wp.com/rubyweb.kr/wp-content/uploads/2019/04/iutjiptotolo.png?fit=735%2C456",
   "https://post-phinf.pstatic.net/MjAyMDA5MjBfMTM1/MDAxNjAwNTk5OTkwNzIx.TaHBHZvdK5ntRL5U_96m00A3m8Sc9frWr1KvQEXDQCsg.VbUm9wNhImeYnWlYWcTXyj911P87sEtMDycL6jwNLC0g.JPEG/Studio-Ghibli-releases-400-images-02.jpg?type=w1200",
   "https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202001/29/a61d0ff9-df15-4d47-a4a6-79b377c3655a.jpg",
+  "http://www.earlyadopter.co.kr/wp-content/uploads/2014/06/019.jpg",
+  "http://image.cine21.com/resize/cine21/still/2020/0429/12_19_48__5ea8f2541e02d[W578-].jpg",
+  "https://cdnweb01.wikitree.co.kr/webdata/editor/202202/03/img_20220203143926_d38fb86e.webp",
+  "http://image.yes24.com/blogimage/blog/d/o/doylenam/R678x011.jpg",
 ];

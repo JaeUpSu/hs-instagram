@@ -13,6 +13,12 @@ import { useNavigate } from "react-router-dom";
 import routes from "routes";
 import { useState } from "react";
 
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  background: white;
+  padding-top: 25px;
+`;
 const FeedContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,9 +28,6 @@ const FeedContainer = styled.div`
   max-height: 830px;
 
   margin: 0 auto;
-
-  border: 1px solid ${(props) => props.theme.borderColor};
-  border-radius: 3px;
 `;
 const FeedHeader = styled.div`
   width: 100%;
@@ -123,38 +126,40 @@ function Home() {
   };
 
   return (
-    <FeedContainer>
-      <FeedHeader>
-        <FeedHeaderLeftBox>
-          <ProfileImg onClick={onProfile} />
-          <ProfileNick>HyeonSu</ProfileNick>
-          <Time>5 분전</Time>
-        </FeedHeaderLeftBox>
-        <FontAwesomeIcon size="2x" icon={Solid.faEllipsis} />
-      </FeedHeader>
-      <FeedPhoto />
-      <FeedActions>
-        <FeedActionsLeftBox>
+    <Container>
+      <FeedContainer>
+        <FeedHeader>
+          <FeedHeaderLeftBox>
+            <ProfileImg onClick={onProfile} />
+            <ProfileNick>HyeonSu</ProfileNick>
+            <Time>5 분전</Time>
+          </FeedHeaderLeftBox>
+          <FontAwesomeIcon size="2x" icon={Solid.faEllipsis} />
+        </FeedHeader>
+        <FeedPhoto />
+        <FeedActions>
+          <FeedActionsLeftBox>
+            <FontAwesomeIcon
+              style={{
+                color: true ? "tomato" : "inherit",
+              }}
+              size="2x"
+              icon={like ? Solid.faHeart : faHeart}
+              onClick={onLike}
+            />
+            <FontAwesomeIcon size="2x" icon={faComment} />
+            <FontAwesomeIcon size="2x" icon={faPaperPlane} />
+          </FeedActionsLeftBox>
           <FontAwesomeIcon
-            style={{
-              color: true ? "tomato" : "inherit",
-            }}
             size="2x"
-            icon={like ? Solid.faHeart : faHeart}
-            onClick={onLike}
+            icon={marking ? Solid.faBookmark : faBookmark}
+            onClick={onMarking}
           />
-          <FontAwesomeIcon size="2x" icon={faComment} />
-          <FontAwesomeIcon size="2x" icon={faPaperPlane} />
-        </FeedActionsLeftBox>
-        <FontAwesomeIcon
-          size="2x"
-          icon={marking ? Solid.faBookmark : faBookmark}
-          onClick={onMarking}
-        />
-      </FeedActions>
-      <Likes>좋아요 1250개</Likes>
-      <CommentsLayout />
-    </FeedContainer>
+        </FeedActions>
+        <Likes>좋아요 1250개</Likes>
+        <CommentsLayout />
+      </FeedContainer>
+    </Container>
   );
 }
 

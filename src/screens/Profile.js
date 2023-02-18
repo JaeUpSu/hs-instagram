@@ -8,21 +8,25 @@ import routes from "routes";
 import { thumbItems } from "images/thumbs";
 
 const Container = styled.div`
+  padding-top: 25px;
+  background-color: white;
+`;
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
   width: 600px;
+  hegiht: 100%;
 
   margin: 0 auto;
-  padding: 20px;
-  padding-bottom: 120px 
-  background-color: white;
-
-  border: 1px solid ${(props) => props.theme.borderColor};
-  border-radius: 3px;
+  padding: 0px 20px;
+  margin-bottom: 40px;
 `;
-
+const Footer = styled.div`
+  width: 100%;
+  height: 100px;
+`;
 const Header = styled.div`
   width: 100%;
   height: 100%;
@@ -30,9 +34,9 @@ const Header = styled.div`
   max-height: 60px;
   display: flex;
   align-items: center;
-  padding-bottom: 15px;
   justify-content: space-between;
-  padding-right: 10px;
+  padding: 0px 20px;
+  padding-bottom: 15px;
   & > svg {
     cursor: pointer;
   }
@@ -239,98 +243,101 @@ function Profile() {
 
   return (
     <Container>
-      <Header>
-        <HeaderLeftBox>
-          <FontAwesomeIcon
-            style={{
-              cursor: "pointer",
-            }}
-            size="2x"
-            icon={Solid.faArrowLeft}
-            onClick={onHome}
-          />
-          <HeaderNick>HyunSu</HeaderNick>
-        </HeaderLeftBox>
-        <HeaderRightBox>
-          <FontAwesomeIcon
-            style={{
-              cursor: "pointer",
-            }}
-            size="2x"
-            icon={alarm ? Solid.faBell : faBell}
-            onClick={onAlarm}
-          />
-          <FontAwesomeIcon size="2x" icon={Solid.faEllipsisV} />
-        </HeaderRightBox>
-      </Header>
-      <UserBox>
-        <UserImg />
-        <UserDataBox>
-          <UserDataColumn>1,003</UserDataColumn>
-          <UserDataValue>게시물</UserDataValue>
-        </UserDataBox>
-        <UserDataBox>
-          <UserDataColumn>5.5만</UserDataColumn>
-          <UserDataValue>팔로워</UserDataValue>
-        </UserDataBox>
-        <UserDataBox>
-          <UserDataColumn>10</UserDataColumn>
-          <UserDataValue>팔로잉</UserDataValue>
-        </UserDataBox>
-      </UserBox>
-      <InfoBox>
-        <b>바이든 “격추한 미확인물체 정찰용 아닌 듯…중국에 사과 안 해”</b>
-      </InfoBox>
-      <BtnBox>
-        {!follow ? (
-          <FollowBtn onClick={onFollow}>팔로우</FollowBtn>
-        ) : (
-          <Btn onClick={onFollow}>팔로잉</Btn>
-        )}
-        <Btn>메시지</Btn>
-        <UserBtn>
-          <FontAwesomeIcon size="lg" icon={Solid.faUserPlus} />
-        </UserBtn>
-      </BtnBox>
-      <Tab>
-        {tabItems.map((item, index) => {
-          return (
-            <div
-              key={index}
+      <Wrapper>
+        <Header>
+          <HeaderLeftBox>
+            <FontAwesomeIcon
               style={{
-                zIndex: 2,
+                cursor: "pointer",
               }}
-              defaultValue={index}
-              className={item.active ? `btn${index} active` : `btn${index}`}
-              onClick={onActive}
-            >
-              <FontAwesomeIcon
-                values={index}
-                onClick={onSendProps}
-                size="2x"
-                icon={item.logo}
-              >
-                check
-              </FontAwesomeIcon>
-            </div>
-          );
-        })}{" "}
-      </Tab>
-      <FeedThumbBox>
-        {thumbItems.map((item, idx) => {
-          return (
-            <FeedThumb
-              key={idx}
-              style={{
-                background: `url(${item})`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-              }}
+              size="2x"
+              icon={Solid.faArrowLeft}
+              onClick={onHome}
             />
-          );
-        })}
-      </FeedThumbBox>
+            <HeaderNick>HyunSu</HeaderNick>
+          </HeaderLeftBox>
+          <HeaderRightBox>
+            <FontAwesomeIcon
+              style={{
+                cursor: "pointer",
+              }}
+              size="2x"
+              icon={alarm ? Solid.faBell : faBell}
+              onClick={onAlarm}
+            />
+            <FontAwesomeIcon size="2x" icon={Solid.faEllipsisV} />
+          </HeaderRightBox>
+        </Header>
+        <UserBox>
+          <UserImg />
+          <UserDataBox>
+            <UserDataColumn>1,003</UserDataColumn>
+            <UserDataValue>게시물</UserDataValue>
+          </UserDataBox>
+          <UserDataBox>
+            <UserDataColumn>5.5만</UserDataColumn>
+            <UserDataValue>팔로워</UserDataValue>
+          </UserDataBox>
+          <UserDataBox>
+            <UserDataColumn>10</UserDataColumn>
+            <UserDataValue>팔로잉</UserDataValue>
+          </UserDataBox>
+        </UserBox>
+        <InfoBox>
+          <b>바이든 “격추한 미확인물체 정찰용 아닌 듯…중국에 사과 안 해”</b>
+        </InfoBox>
+        <BtnBox>
+          {!follow ? (
+            <FollowBtn onClick={onFollow}>팔로우</FollowBtn>
+          ) : (
+            <Btn onClick={onFollow}>팔로잉</Btn>
+          )}
+          <Btn>메시지</Btn>
+          <UserBtn>
+            <FontAwesomeIcon size="lg" icon={Solid.faUserPlus} />
+          </UserBtn>
+        </BtnBox>
+        <Tab>
+          {tabItems.map((item, index) => {
+            return (
+              <div
+                key={index}
+                style={{
+                  zIndex: 2,
+                }}
+                defaultValue={index}
+                className={item.active ? `btn${index} active` : `btn${index}`}
+                onClick={onActive}
+              >
+                <FontAwesomeIcon
+                  values={index}
+                  onClick={onSendProps}
+                  size="2x"
+                  icon={item.logo}
+                >
+                  check
+                </FontAwesomeIcon>
+              </div>
+            );
+          })}{" "}
+        </Tab>
+        <FeedThumbBox>
+          {thumbItems.map((item, idx) => {
+            return (
+              <FeedThumb
+                key={idx}
+                style={{
+                  background: `url(${item})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                }}
+              />
+            );
+          })}
+        </FeedThumbBox>
+        <Footer />
+      </Wrapper>
     </Container>
   );
 }
