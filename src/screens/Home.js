@@ -9,6 +9,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import jibri from "../images/jibri.jpg";
 import CommentsLayout from "components/Comments";
+import { useNavigate } from "react-router-dom";
+import routes from "routes";
+import { useState } from "react";
 
 const FeedContainer = styled.div`
   display: flex;
@@ -104,11 +107,26 @@ const Likes = styled.div`
 `;
 
 function Home() {
+  const [like, setLike] = useState(false);
+  const [marking, setMarking] = useState(false);
+  const navigate = useNavigate();
+
+  const onLike = () => {
+    setLike(!like);
+  };
+  const onMarking = () => {
+    setMarking(!marking);
+  };
+
+  const onProfile = () => {
+    navigate(`${routes.profile}`);
+  };
+
   return (
     <FeedContainer>
       <FeedHeader>
         <FeedHeaderLeftBox>
-          <ProfileImg />
+          <ProfileImg onClick={onProfile} />
           <ProfileNick>HyeonSu</ProfileNick>
           <Time>5 분전</Time>
         </FeedHeaderLeftBox>
@@ -122,12 +140,17 @@ function Home() {
               color: true ? "tomato" : "inherit",
             }}
             size="2x"
-            icon={Solid.faHeart}
+            icon={like ? Solid.faHeart : faHeart}
+            onClick={onLike}
           />
           <FontAwesomeIcon size="2x" icon={faComment} />
           <FontAwesomeIcon size="2x" icon={faPaperPlane} />
         </FeedActionsLeftBox>
-        <FontAwesomeIcon size="2x" icon={faBookmark} />
+        <FontAwesomeIcon
+          size="2x"
+          icon={marking ? Solid.faBookmark : faBookmark}
+          onClick={onMarking}
+        />
       </FeedActions>
       <Likes>좋아요 1250개</Likes>
       <CommentsLayout />

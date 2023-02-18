@@ -242,6 +242,9 @@ function Profile() {
       <Header>
         <HeaderLeftBox>
           <FontAwesomeIcon
+            style={{
+              cursor: "pointer",
+            }}
             size="2x"
             icon={Solid.faArrowLeft}
             onClick={onHome}
