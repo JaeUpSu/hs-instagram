@@ -4,6 +4,8 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
 import { faPaperPlane, faUser } from "@fortawesome/free-regular-svg-icons";
+import { useNavigate } from "react-router-dom";
+import routes from "../routes";
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -39,12 +41,21 @@ const Icon = styled.span`
 const Button = styled.span``;
 
 function Header() {
+  const navigate = useNavigate();
+
+  const onHome = () => {
+    navigate(`${routes.home}`);
+  };
+  const onProfile = () => {
+    navigate(`/${routes.profile}`);
+  };
+
   return (
     <HeaderContainer>
       <Wrapper>
         <Icon>
           <Column>
-            <FontAwesomeIcon size={"2x"} icon={faInstagram} />
+            <FontAwesomeIcon size={"2x"} icon={faInstagram} onClick={onHome} />
           </Column>
         </Icon>
         <Column>
@@ -55,7 +66,7 @@ function Header() {
             <FontAwesomeIcon size={"lg"} icon={faPaperPlane} />
           </Icon>
           <Icon>
-            <FontAwesomeIcon size={"lg"} icon={faUser} />
+            <FontAwesomeIcon size={"lg"} icon={faUser} onClick={onProfile} />
           </Icon>
         </Column>
       </Wrapper>

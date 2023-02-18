@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import jibri from "../images/jibri.jpg";
+import CommentsLayout from "components/Comments";
 
 const FeedContainer = styled.div`
   display: flex;
@@ -101,49 +102,6 @@ const Likes = styled.div`
   font-weight: bold;
   font-size: 12px;
 `;
-const Comments = styled.p`
-  width: 100%;
-  padding: 0 20px;
-  padding-top: 5px;
-  font-size: 12px;
-`;
-const Replys = styled.div`
-  font-size: 13px;
-  color: #666666;
-  width: 100%;
-  padding: 5px 20px;
-  padding-bottom: 15px;
-`;
-
-const ReplysLine = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  div {
-    width: 100%;
-    height: 1px;
-    background-color: lightgray;
-    margin: 10px 0;
-  }
-`;
-
-const ReplysInputBox = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const ReplysInputProfile = styled(ProfileImg)`
-  width: 32px;
-  height: 32px;
-  margin-right: 10px;
-`;
-const ReplysEnterBtn = styled.button`
-  background: transparent;
-  border: 0px;
-  width: 50px;
-  color: #2493ff;
-  cursor: pointer;
-`;
 
 function Home() {
   return (
@@ -164,7 +122,7 @@ function Home() {
               color: true ? "tomato" : "inherit",
             }}
             size="2x"
-            icon={faHeart}
+            icon={Solid.faHeart}
           />
           <FontAwesomeIcon size="2x" icon={faComment} />
           <FontAwesomeIcon size="2x" icon={faPaperPlane} />
@@ -172,39 +130,7 @@ function Home() {
         <FontAwesomeIcon size="2x" icon={faBookmark} />
       </FeedActions>
       <Likes>좋아요 1250개</Likes>
-      <Comments>
-        <b
-          style={{
-            fontWeight: "800",
-            paddingRight: "5px",
-          }}
-        >
-          HyeonSu{" "}
-        </b>
-        이재용 삼성전자 회장이 수사받을 당시 변호인들이 한겨레신문을 상대로
-        제기한 정정보도 청구 소송에서 다시 한번 패소했다. 서울중앙지법
-        민사8-2부(김봉원 강성훈 권순민 부장판사)는 16일 이 회장의 전 변호인인
-        최재경, 이동열 변호사가 한겨레신문을 상대로 낸 정정보도 청구 소송에서
-        1심과 같이 원고 패소로 판결했다. 한겨레신문은 2020년 9월 16일 검찰
-        관계자를 인용해 "이 변호사가 이 부회장의 구속영장이 청구되기 전 수사
-        검사에게 연락해 '삼성생명 관련 부분은 예민하니 빼 달라. 최 변호사
-        요청이다'라고 말했다"고 보도했다.
-      </Comments>
-      <Replys>
-        댓글 95개 모두 보기{" "}
-        <ReplysLine>
-          <div />
-        </ReplysLine>
-        <ReplysInputBox>
-          <ReplysInputProfile />
-          <input
-            style={{ width: "100%" }}
-            type="text"
-            placeholder="Write a comment ..."
-          />
-          <ReplysEnterBtn>게시</ReplysEnterBtn>
-        </ReplysInputBox>
-      </Replys>
+      <CommentsLayout />
     </FeedContainer>
   );
 }
