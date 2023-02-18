@@ -38,6 +38,16 @@ const Header = styled.div`
   }
 `;
 
+const HeaderNick = styled.p`
+  margin-left: 40px;
+  font-size: 23px;
+  font-weight: 600;
+  transform: translateY(-2px);
+`;
+const HeaderLeftBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
 const HeaderRightBox = styled.div`
   & > svg {
     margin-left: 35px;
@@ -230,7 +240,14 @@ function Profile() {
   return (
     <Container>
       <Header>
-        <FontAwesomeIcon size="2x" icon={Solid.faArrowLeft} onClick={onHome} />
+        <HeaderLeftBox>
+          <FontAwesomeIcon
+            size="2x"
+            icon={Solid.faArrowLeft}
+            onClick={onHome}
+          />
+          <HeaderNick>HyunSu</HeaderNick>
+        </HeaderLeftBox>
         <HeaderRightBox>
           <FontAwesomeIcon
             style={{
