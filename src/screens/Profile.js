@@ -198,14 +198,13 @@ const FeedHiddenAction = styled.div`
     margin-right: 10px;
   }
   & > svg:nth-child(2) {
-    margin-left: 10px;
+    margin: 0 10px;
   }
 `;
 function Profile() {
   const navigate = useNavigate();
   const [follow, setFollow] = useState(false);
   const [alarm, setAlarm] = useState(false);
-  const [likes, setLikes] = useState(new Array(thumbItems.length).fill(false));
   const [tabItems, setTabItems] = useState([
     {
       logo: Solid.faTableCells,
@@ -220,7 +219,15 @@ function Profile() {
       active: false,
     },
   ]);
+  const [activeIdx, setActiveIdx] = useState(0);
 
+  const [isLike, setIsLike] = useState([
+    new Array(thumbItems[0].length).fill(false),
+  ]);
+  const [likes, setLikes] = useState(new Array(thumbItems[0].length).fill(12));
+  const [comments, setComments] = useState(
+    new Array(thumbItems[0].length).fill(4)
+  );
   const onAlarm = () => {
     setAlarm(!alarm);
   };
@@ -232,7 +239,13 @@ function Profile() {
   const onLike = (e) => {
     const idx = e.currentTarget.getAttribute("values");
     // console.log(idx);
-    likes[idx] = !likes[idx];
+    isLike[idx] = !isLike[idx];
+    setIsLike([...isLike]);
+    if (isLike[idx]) {
+      likes[idx] = likes[idx] + 1;
+    } else {
+      likes[idx] = likes[idx] - 1;
+    }
     setLikes([...likes]);
   };
 
@@ -252,13 +265,16 @@ function Profile() {
         active: false,
       },
     ];
+    let idx = 0;
     if (className.includes("0")) {
-      items[0].active = true;
+      idx = 0;
     } else if (className.includes("1")) {
-      items[1].active = true;
+      idx = 1;
     } else {
-      items[2].active = true;
+      idx = 2;
     }
+    items[idx].active = true;
+    setActiveIdx(idx);
     setTabItems((tItems) => (tItems = items));
   };
 
@@ -280,6 +296,7 @@ function Profile() {
       },
     ];
     items[idx].active = true;
+    setActiveIdx(idx);
     setTabItems((tItems) => (tItems = items));
     e.stopPropagation();
   };
@@ -369,12 +386,12 @@ function Profile() {
           })}{" "}
         </Tab>
         <FeedThumbBox>
-          {thumbItems.map((item, idx) => {
+          {thumbItems[activeIdx].map((item, idx) => {
             return (
               <FeedThumbItem key={idx}>
                 <FeedThumb
                   style={{
-                    background: `url(${item})`,
+                    backgroundImage: `url(${item})`,
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
                     backgroundSize: "cover",
@@ -383,11 +400,13 @@ function Profile() {
                 <FeedHiddenAction>
                   <FontAwesomeIcon
                     values={idx}
-                    size="2x"
-                    icon={likes[idx] ? Solid.faHeart : faHeart}
+                    size="lg"
+                    icon={isLike[idx] ? Solid.faHeart : faHeart}
                     onClick={onLike}
                   />
-                  <FontAwesomeIcon size="2x" icon={faComment} />
+                  {likes[idx]}
+                  <FontAwesomeIcon size="lg" icon={faComment} />
+                  {comments[idx]}
                 </FeedHiddenAction>
               </FeedThumbItem>
             );
