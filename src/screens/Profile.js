@@ -1,5 +1,10 @@
 import * as Solid from "@fortawesome/free-solid-svg-icons";
-import { faBell, faUserCircle } from "@fortawesome/free-regular-svg-icons";
+import {
+  faBell,
+  faUserCircle,
+  faHeart,
+  faComment,
+} from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -150,22 +155,57 @@ const FeedThumbBox = styled.div`
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
   gap: 3px;
 `;
+
+const FeedThumbItem = styled.a`
+  display: block; /* 영역적용위해 사용 */
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+  cursor: pointer;
+
+  &:hover div,
+  &:focus div {
+    opacity: 1;
+  }
+`;
+
 const FeedThumb = styled.div`
   width: 180px;
   height: 200px;
   cursor: pointer;
-  border: 1px solid black;
-  &:hover {
-    transform: scale(1.02);
-    opacity: 0.8;
-    transition: all 0.5s;
+`;
+const FeedHiddenAction = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  position: absolute; /* 이미지와 겹치게 처리 */
+  top: 0;
+  left: 0;
+
+  color: #fff;
+
+  opacity: 0; /* 처음엔 안보이고 */
+
+  transition: 0.3s;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  & > svg:nth-child(1) {
+    margin-right: 10px;
+  }
+  & > svg:nth-child(2) {
+    margin-left: 10px;
   }
 `;
-
 function Profile() {
   const navigate = useNavigate();
   const [follow, setFollow] = useState(false);
   const [alarm, setAlarm] = useState(false);
+  const [likes, setLikes] = useState(new Array(thumbItems.length).fill(false));
   const [tabItems, setTabItems] = useState([
     {
       logo: Solid.faTableCells,
@@ -187,6 +227,13 @@ function Profile() {
 
   const onFollow = () => {
     setFollow(!follow);
+  };
+
+  const onLike = (e) => {
+    const idx = e.currentTarget.getAttribute("values");
+    // console.log(idx);
+    likes[idx] = !likes[idx];
+    setLikes([...likes]);
   };
 
   const onActive = (e) => {
@@ -324,15 +371,25 @@ function Profile() {
         <FeedThumbBox>
           {thumbItems.map((item, idx) => {
             return (
-              <FeedThumb
-                key={idx}
-                style={{
-                  background: `url(${item})`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                  backgroundSize: "cover",
-                }}
-              />
+              <FeedThumbItem key={idx}>
+                <FeedThumb
+                  style={{
+                    background: `url(${item})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                  }}
+                />
+                <FeedHiddenAction>
+                  <FontAwesomeIcon
+                    values={idx}
+                    size="2x"
+                    icon={likes[idx] ? Solid.faHeart : faHeart}
+                    onClick={onLike}
+                  />
+                  <FontAwesomeIcon size="2x" icon={faComment} />
+                </FeedHiddenAction>
+              </FeedThumbItem>
             );
           })}
         </FeedThumbBox>

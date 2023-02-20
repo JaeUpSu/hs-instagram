@@ -16,7 +16,6 @@ import { useState } from "react";
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background: white;
   padding-top: 25px;
 `;
 const FeedContainer = styled.div`
