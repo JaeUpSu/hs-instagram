@@ -1,164 +1,113 @@
-import styled from "styled-components";
-import * as Solid from "@fortawesome/free-solid-svg-icons";
-import {
-  faComment,
-  faHeart,
-  faPaperPlane,
-  faBookmark,
-} from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Feed from "components/Feed";
 import jibri from "../images/jibri.jpg";
-import CommentsLayout from "components/Comments";
-import { useNavigate } from "react-router-dom";
-import routes from "routes";
-import { useState } from "react";
-
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  padding-top: 25px;
-`;
-const FeedContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  width: 600px;
-  max-height: 830px;
-
-  margin: 0 auto;
-`;
-const FeedHeader = styled.div`
-  width: 100%;
-  height: 100%;
-  border-radius: 3px;
-  max-height: 60px;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  justify-content: space-between;
-  padding-right: 20px;
-  & > svg {
-    cursor: pointer;
-  }
-`;
-const LeftBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const FeedHeaderLeftBox = styled(LeftBox)`
-  & > div {
-    cursor: pointer;
-  }
-  & > p {
-    cursor: pointer;
-  }
-`;
-const FeedActionsLeftBox = styled(LeftBox)`
-  & > svg {
-    margin-left: 20px;
-    cursor: pointer;
-  }
-`;
-const ProfileImg = styled.div`
-  border-radius: 50%;
-  border: 1px solid ${(props) => props.theme.borderColor};
-  width: 35px;
-  height: 35px;
-  background-image: url(https://cdn.eyesmag.com/content/uploads/sliderImages/2021/07/19/005-d020cb23-f09f-4f55-bfca-b2540f194ea2.jpg);
-  background-size: cover;
-  background-position: center;
-`;
-const ProfileNick = styled.p`
-  margin-left: 14px;
-  transform: translateY(-15%);
-  font-weight: bold;
-`;
-const Time = styled.span`
-  font-size: 10px;
-  margin-left: 15px;
-  transform: translateY(-10%);
-`;
-const FeedPhoto = styled.div`
-  width: 100%;
-  height: 500px;
-  background-image: url(${jibri});
-  background-position: center;
-  background-size: cover;
-`;
-
-const FeedActions = styled.div`
-  width: 100%;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 20px;
-  & > svg {
-    cursor: pointer;
-  }
-`;
-
-const Likes = styled.div`
-  width: 100%;
-  padding: 0 20px;
-  font-weight: bold;
-  font-size: 12px;
-`;
 
 function Home() {
-  const [like, setLike] = useState(false);
-  const [marking, setMarking] = useState(false);
-  const navigate = useNavigate();
-
-  const onLike = () => {
-    setLike(!like);
-  };
-  const onMarking = () => {
-    setMarking(!marking);
-  };
-
-  const onProfile = () => {
-    navigate(`${routes.profile}`);
-  };
-
+  const data = [
+    {
+      id: 1,
+      file: `${jibri}`,
+      caption:
+        "이재용 삼성전자 회장이 수사받을 당시 변호인들이 한겨레신문을 상대로 제기한 정정보도 청구 소송에서 다시 한번 패소했다. 서울중앙지법 민사8-2부(김봉원 강성훈 권순민 부장판사)는 16일 이 회장의 전 변호인인 최재경, 이동열 변호사가 한겨레신문을 상대로 낸 정정보도 청구 소송에서 1심과 같이 원고 패소로 판결했다. 한겨레신문은 2020년 9월 16일 검찰 관계자를 인용해 '이 변호사가 이 부회장의 구속영장이 청구되기 전 수사 검사에게 연락해 '삼성생명 관련 부분은 예민하니 빼 달라. 최 변호사 요청이다'라고 말했다'고 보도했다.",
+      user: {
+        username: "HyeonSu",
+        profileImg:
+          "https://cdn.eyesmag.com/content/uploads/sliderImages/2021/07/19/005-d020cb23-f09f-4f55-bfca-b2540f194ea2.jpg",
+      },
+      likes: 1250,
+      commentNumber: 95,
+      isLiked: true,
+      comments: [
+        {
+          id: 1,
+          payload: "첫 번째 댓글",
+          user: {
+            username: "manOne",
+            profileImg:
+              "https://img.seoul.co.kr/img/upload/2021/07/02/SSI_20210702145200_O2.jpg",
+          },
+        },
+        {
+          id: 2,
+          payload: "두 번째 댓글",
+          user: {
+            username: "womanOne",
+            profileImg:
+              "https://cdn.spotvnews.co.kr/news/photo/202211/562508_786105_5314.jpg",
+          },
+        },
+        {
+          id: 3,
+          payload: "세 번째 댓글",
+          user: {
+            username: "manTwo",
+            profileImg:
+              "https://img.hankyung.com/photo/201811/01.18271154.1.jpg",
+          },
+        },
+      ],
+    },
+    {
+      id: 2,
+      file: "https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202001/29/a61d0ff9-df15-4d47-a4a6-79b377c3655a.jpg",
+      caption:
+        "이재용 삼성전자 회장이 수사받을 당시 변호인들이 한겨레신문을 상대로 제기한 정정보도 청구 소송에서 다시 한번 패소했다. 서울중앙지법 민사8-2부(김봉원 강성훈 권순민 부장판사)는 16일 이 회장의 전 변호인인 최재경, 이동열 변호사가 한겨레신문을 상대로 낸 정정보도 청구 소송에서 1심과 같이 원고 패소로 판결했다. 한겨레신문은 2020년 9월 16일 검찰 관계자를 인용해 '이 변호사가 이 부회장의 구속영장이 청구되기 전 수사 검사에게 연락해 '삼성생명 관련 부분은 예민하니 빼 달라. 최 변호사 요청이다'라고 말했다'고 보도했다.",
+      user: {
+        username: "HyeonSu",
+        profileImg:
+          "https://cdn.eyesmag.com/content/uploads/sliderImages/2021/07/19/005-d020cb23-f09f-4f55-bfca-b2540f194ea2.jpg",
+      },
+      likes: 1250,
+      commentNumber: 95,
+      isLiked: true,
+      comments: [
+        {
+          id: 1,
+          payload: "첫 번째 댓글",
+          user: {
+            username: "manOne",
+            profileImg:
+              "https://img.seoul.co.kr/img/upload/2021/07/02/SSI_20210702145200_O2.jpg",
+          },
+        },
+      ],
+    },
+    {
+      id: 3,
+      file: "http://www.earlyadopter.co.kr/wp-content/uploads/2014/06/019.jpg",
+      caption:
+        "이재용 삼성전자 회장이 수사받을 당시 변호인들이 한겨레신문을 상대로 제기한 정정보도 청구 소송에서 다시 한번 패소했다. 서울중앙지법 민사8-2부(김봉원 강성훈 권순민 부장판사)는 16일 이 회장의 전 변호인인 최재경, 이동열 변호사가 한겨레신문을 상대로 낸 정정보도 청구 소송에서 1심과 같이 원고 패소로 판결했다. 한겨레신문은 2020년 9월 16일 검찰 관계자를 인용해 '이 변호사가 이 부회장의 구속영장이 청구되기 전 수사 검사에게 연락해 '삼성생명 관련 부분은 예민하니 빼 달라. 최 변호사 요청이다'라고 말했다'고 보도했다.",
+      user: {
+        username: "HyeonSu",
+        profileImg:
+          "https://cdn.eyesmag.com/content/uploads/sliderImages/2021/07/19/005-d020cb23-f09f-4f55-bfca-b2540f194ea2.jpg",
+      },
+      likes: 1250,
+      commentNumber: 95,
+      isLiked: true,
+      comments: [
+        {
+          id: 1,
+          payload: "첫 번째 댓글",
+          user: {
+            username: "manOne",
+            profileImg:
+              "https://img.seoul.co.kr/img/upload/2021/07/02/SSI_20210702145200_O2.jpg",
+          },
+        },
+      ],
+    },
+  ];
   return (
-    <Container>
-      <FeedContainer>
-        <FeedHeader>
-          <FeedHeaderLeftBox>
-            <ProfileImg onClick={onProfile} />
-            <ProfileNick>HyeonSu</ProfileNick>
-            <Time>5 분전</Time>
-          </FeedHeaderLeftBox>
-          <FontAwesomeIcon size="2x" icon={Solid.faEllipsis} />
-        </FeedHeader>
-        <FeedPhoto />
-        <FeedActions>
-          <FeedActionsLeftBox>
-            <FontAwesomeIcon
-              style={{
-                color: true ? "tomato" : "inherit",
-              }}
-              size="2x"
-              icon={like ? Solid.faHeart : faHeart}
-              onClick={onLike}
-            />
-            <FontAwesomeIcon size="2x" icon={faComment} />
-            <FontAwesomeIcon size="2x" icon={faPaperPlane} />
-          </FeedActionsLeftBox>
-          <FontAwesomeIcon
-            size="2x"
-            icon={marking ? Solid.faBookmark : faBookmark}
-            onClick={onMarking}
-          />
-        </FeedActions>
-        <Likes>좋아요 1250개</Likes>
-        <CommentsLayout />
-      </FeedContainer>
-    </Container>
+    <div
+      style={{
+        paddingBottom: "50px",
+      }}
+    >
+      {data?.map((feed) => {
+        // 객체를 넘겨줄 때 {...ObjectValue}
+        return <Feed key={feed.id} {...feed} />;
+      })}
+    </div>
   );
 }
 
