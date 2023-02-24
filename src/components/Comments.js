@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useState } from "react";
+import Comment from "./Comment";
 
 const CommentsContainer = styled.div``;
 const Comments = styled.div`
@@ -11,19 +13,8 @@ const Comments = styled.div`
 `;
 const CommentCounts = styled.p`
   margin-bottom: 10px;
+  cursor: pointer;
 `;
-const CommentsItem = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 13px;
-  padding: 3px 0px;
-`;
-const CommentsAuthor = styled.b`
-  padding-right: 5px;
-  width: 90px;
-  font-weight: 800;
-`;
-const CommentsContents = styled.span``;
 const CommentsLine = styled.div`
   display: flex;
   justify-content: center;
@@ -41,7 +32,7 @@ const CommentsInputBox = styled.div`
   align-items: center;
 `;
 
-const CommentsProfile = styled.div`
+const Avater = styled.div`
   border-radius: 50%;
   border: 1px solid ${(props) => props.theme.borderColor};
 
@@ -51,7 +42,8 @@ const CommentsProfile = styled.div`
   height: 32px;
   margin-right: 10px;
 `;
-const CommentsInputProfile = styled(CommentsProfile)``;
+
+const CommentsInputProfile = styled(Avater)``;
 const CommentsEnterBtn = styled.button`
   background: transparent;
   border: 0px;
@@ -60,30 +52,35 @@ const CommentsEnterBtn = styled.button`
   cursor: pointer;
 `;
 
-function CommentsLayout({ comments, commentNumber, profileImg }) {
+function CommentsLayout({ comments, commentNumber, img }) {
+  const [show, setShow] = useState(false);
+
+  const onShow = () => {
+    setShow(!show);
+  };
+
   return (
     <CommentsContainer>
       <Comments>
-        <CommentCounts>댓글 {commentNumber}개 모두 보기</CommentCounts>
-        {comments?.map((reply) => {
-          console.log(reply.user.profileImg);
-          return (
-            <CommentsItem key={reply.id}>
-              <CommentsProfile
-                style={{ backgroundImage: `url(${reply.user.profileImg})` }}
-              />
-              <CommentsAuthor>{reply.user.username}</CommentsAuthor>
-              <CommentsContents>{reply.payload}</CommentsContents>
-            </CommentsItem>
-          );
-        })}
+        <CommentCounts onClick={onShow}>
+          {!show
+            ? commentNumber > 0
+              ? `댓글 ${commentNumber}개 모두 보기`
+              : ``
+            : `댓글 숨기기`}
+        </CommentCounts>
+        {show ? (
+          comments?.map((reply, idx) => {
+            return <Comment key={idx} {...reply} />;
+          })
+        ) : (
+          <></>
+        )}
         <CommentsLine>
           <div />
         </CommentsLine>
         <CommentsInputBox>
-          <CommentsInputProfile
-            style={{ backgroundImage: `url(${profileImg})` }}
-          />
+          <CommentsInputProfile style={{ backgroundImage: `url(${img})` }} />
           <input
             style={{ width: "85%" }}
             type="text"

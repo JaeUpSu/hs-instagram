@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
+// import { useForm } from "react-hook-form"; // npm i react-hook-form --save
+// import { useMutation } from "@tanstack/react-query";
+// import { signup } from "../api";
 
 import routes from "routes";
 import * as SignUpComponents from "components/SignUpComponets";

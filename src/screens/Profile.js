@@ -11,6 +11,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import routes from "routes";
 import { thumbItems } from "images/thumbs";
+// import { useParams } from "react-router-dom";
 
 const Container = styled.div`
   padding-top: 25px;
@@ -304,6 +305,9 @@ function Profile() {
   const onHome = () => {
     navigate(`${routes.home}`);
   };
+
+  // const { username } = useParams();
+  // console.log("username => " + username);
 
   return (
     <Container>

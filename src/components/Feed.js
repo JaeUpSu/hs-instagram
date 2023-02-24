@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import jibri from "../images/jibri.jpg";
 import CommentsLayout from "components/Comments";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import routes from "routes";
 import { useState } from "react";
 
@@ -24,7 +24,6 @@ const FeedContainer = styled.div`
   align-items: center;
 
   width: 600px;
-  max-height: 830px;
 
   margin: 0 auto;
   box-shadow: 0 0 5px 1px rgb(0, 0, 0, 0.4);
@@ -76,6 +75,7 @@ const ProfileNick = styled.p`
   margin-left: 14px;
   transform: translateY(-15%);
   font-weight: bold;
+  text-decoration-style: none;
 `;
 const Time = styled.span`
   font-size: 10px;
@@ -119,17 +119,8 @@ const FeedAuthor = styled.b`
   padding-right: 5px;
 `;
 
-function Feed({
-  id,
-  file,
-  caption,
-  user,
-  likes,
-  comments,
-  commentNumber,
-  isLiked,
-}) {
-  const [like, setLike] = useState(isLiked);
+function Feed({ id, img, caption, user, likes_count, reviews }) {
+  const [like, setLike] = useState(false);
   const [marking, setMarking] = useState(false);
   const navigate = useNavigate();
 
@@ -149,20 +140,27 @@ function Feed({
       <FeedContainer>
         <FeedHeader>
           <FeedHeaderLeftBox>
-            <ProfileImg
-              onClick={onProfile}
-              style={{
-                backgroundImage: `url(${user.profileImg})`,
-              }}
-            />
-            <ProfileNick>{user.username}</ProfileNick>
+            <Link to={`${routes.profile}`}>
+              <ProfileImg
+                // onClick={onProfile}
+                style={{
+                  backgroundImage: `url(${user.img})`,
+                }}
+              />
+            </Link>
+            <Link
+              style={{ textDecoration: "none", color: "#444" }}
+              to={`${routes.profile}`}
+            >
+              <ProfileNick>{user.username}</ProfileNick>
+            </Link>
             <Time>5 분전</Time>
           </FeedHeaderLeftBox>
           <FontAwesomeIcon size="2x" icon={Solid.faEllipsis} />
         </FeedHeader>
         <FeedPhoto
           style={{
-            backgroundImage: `url(${file})`,
+            backgroundImage: `url(${img})`,
           }}
         />
         <FeedActions>
@@ -184,7 +182,7 @@ function Feed({
             onClick={onMarking}
           />
         </FeedActions>
-        <Likes>좋아요 {likes}개</Likes>
+        <Likes>좋아요 {likes_count}개</Likes>
         <div>
           <FeedBody>
             <FeedAuthor>{user.username}</FeedAuthor>
@@ -192,8 +190,8 @@ function Feed({
           </FeedBody>
           <CommentsLayout
             {...user}
-            comments={comments}
-            commentNumber={commentNumber}
+            comments={reviews}
+            commentNumber={reviews.length}
           />
         </div>
       </FeedContainer>
