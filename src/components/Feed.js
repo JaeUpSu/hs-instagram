@@ -110,7 +110,7 @@ const Likes = styled.div`
 `;
 
 const FeedBody = styled.p`
-  width: 100%;
+  width: 600px;
   padding: 5px 20px;
   font-size: 12px;
 `;
@@ -119,7 +119,7 @@ const FeedAuthor = styled.b`
   padding-right: 5px;
 `;
 
-function Feed({ id, img, caption, user, likes_count, reviews }) {
+function Feed({ id, img, caption, user, likes_count, reviews, feed }) {
   const [like, setLike] = useState(false);
   const [marking, setMarking] = useState(false);
   const navigate = useNavigate();
@@ -128,6 +128,7 @@ function Feed({ id, img, caption, user, likes_count, reviews }) {
     setLike(!like);
   };
   const onMarking = () => {
+    console.log(feed);
     setMarking(!marking);
   };
 
@@ -140,7 +141,7 @@ function Feed({ id, img, caption, user, likes_count, reviews }) {
       <FeedContainer>
         <FeedHeader>
           <FeedHeaderLeftBox>
-            <Link to={`${routes.profile}`}>
+            <Link to={`/profile/${user.username}`}>
               <ProfileImg
                 // onClick={onProfile}
                 style={{
@@ -192,6 +193,7 @@ function Feed({ id, img, caption, user, likes_count, reviews }) {
             {...user}
             comments={reviews}
             commentNumber={reviews.length}
+            feed={feed}
           />
         </div>
       </FeedContainer>

@@ -1,5 +1,10 @@
-import styled from "styled-components";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+
+import { comment } from "../api";
+
+import styled from "styled-components";
 import Comment from "./Comment";
 
 const CommentsContainer = styled.div``;
@@ -27,7 +32,7 @@ const CommentsLine = styled.div`
   }
 `;
 
-const CommentsInputBox = styled.div`
+const CommentsInputForm = styled.form`
   display: flex;
   align-items: center;
 `;
@@ -52,11 +57,29 @@ const CommentsEnterBtn = styled.button`
   cursor: pointer;
 `;
 
-function CommentsLayout({ comments, commentNumber, img }) {
+function CommentsLayout({ comments, commentNumber, img, feed }) {
   const [show, setShow] = useState(false);
+  const { register, watch, handleSubmit } = useForm();
 
   const onShow = () => {
+    console.log(feed);
     setShow(!show);
+  };
+
+  const mutation = useMutation(comment, {
+    onSuccess: () => {
+      console.log("success post comment");
+    },
+    onError: () => {
+      console.log("error post comment");
+    },
+  });
+
+  const onSubmit = ({ caption }) => {
+    const _user = feed.user.pk;
+    const _feed = feed.pk;
+    console.log(caption + " " + _user + " " + _feed);
+    mutation.mutate({ caption, _user, _feed });
   };
 
   return (
@@ -79,15 +102,16 @@ function CommentsLayout({ comments, commentNumber, img }) {
         <CommentsLine>
           <div />
         </CommentsLine>
-        <CommentsInputBox>
+        <CommentsInputForm onSubmit={handleSubmit(onSubmit)}>
           <CommentsInputProfile style={{ backgroundImage: `url(${img})` }} />
           <input
             style={{ width: "85%" }}
             type="text"
             placeholder="Write a comment ..."
+            {...register("caption")}
           />
-          <CommentsEnterBtn>게시</CommentsEnterBtn>
-        </CommentsInputBox>
+          <CommentsEnterBtn type="submit">게시</CommentsEnterBtn>
+        </CommentsInputForm>
       </Comments>
     </CommentsContainer>
   );

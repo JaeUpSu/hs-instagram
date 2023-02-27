@@ -26,8 +26,8 @@ const Contents = styled.span``;
 function Comment({ caption, user }) {
   return (
     <Container>
-      <Avater style={{ backgroundImage: `url(${user.img})` }} />
-      <Author>{user.username}</Author>
+      <Avater style={{ backgroundImage: `url(${user?.img})` }} />
+      <Author>{user?.username}</Author>
       <Contents>{caption}</Contents>
     </Container>
   );

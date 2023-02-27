@@ -7,6 +7,26 @@ const instance = axios.create({
   withCredentials: true, // 서로 다른 도메인 요청일 때도 credential 데이터를 담아보내겠다 + 쿠키 데이터 담아서 보내겠다.
 });
 
+export const comment = ({ caption, _user, _feed }) => {
+  const user = _user;
+  const feed = _feed;
+
+  console.log({ feed, caption, user });
+  console.log(Cookie.get("csrftoken"));
+  instance
+    .post(
+      "reviews/",
+      { feed, caption, user },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};
+
 // myinfo 에서 data 가져오기
 export const getUserInfo = () =>
   instance.get("users/myinfo").then((response) => response.data);
@@ -53,6 +73,22 @@ export const getUserInfo = () =>
 // // 전체 피드
 export const getAllFeeds = () =>
   instance.get(`feeds/`).then((response) => response.data);
+
+// export const getUserFeeds = (username) => {
+
+//   return instance.get(`feeds/${username}`).then((response) => response.data);
+// };
+
+// 유저
+export const getUserFeeds = ({ queryKey }) => {
+  const username = queryKey[1];
+  return instance.get(`feeds/${username}`).then((response) => {
+    return response.data;
+  });
+};
+// // 유저
+export const getUser = (username) =>
+  instance.get(`users/${username}`).then((response) => response.data);
 
 // // 유저 프로필 피드
 // // /users/:username

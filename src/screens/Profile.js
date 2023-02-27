@@ -6,11 +6,14 @@ import {
   faComment,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
 import routes from "routes";
+
 import { thumbItems } from "images/thumbs";
+import { useQuery } from "@tanstack/react-query";
+import { getUserFeeds } from "api";
 // import { useParams } from "react-router-dom";
 
 const Container = styled.div`
@@ -203,6 +206,12 @@ const FeedHiddenAction = styled.div`
   }
 `;
 function Profile() {
+  const { username } = useParams();
+  console.log(username);
+
+  const { data } = useQuery(["feeds", username], getUserFeeds);
+  console.log("data", data);
+
   const navigate = useNavigate();
   const [follow, setFollow] = useState(false);
   const [alarm, setAlarm] = useState(false);
@@ -322,7 +331,7 @@ function Profile() {
               icon={Solid.faArrowLeft}
               onClick={onHome}
             />
-            <HeaderNick>HyunSu</HeaderNick>
+            <HeaderNick>{username}</HeaderNick>
           </HeaderLeftBox>
           <HeaderRightBox>
             <FontAwesomeIcon
@@ -337,13 +346,17 @@ function Profile() {
           </HeaderRightBox>
         </Header>
         <UserBox>
-          <UserImg />
+          <UserImg
+            style={{ backgroundImage: `url(${data ? data[0].user.img : ""})` }}
+          />
           <UserDataBox>
-            <UserDataColumn>1,003</UserDataColumn>
+            <UserDataColumn>{data?.length}</UserDataColumn>
             <UserDataValue>게시물</UserDataValue>
           </UserDataBox>
           <UserDataBox>
-            <UserDataColumn>5.5만</UserDataColumn>
+            <UserDataColumn>
+              {data ? data[0].user.followerNumber : ""}
+            </UserDataColumn>
             <UserDataValue>팔로워</UserDataValue>
           </UserDataBox>
           <UserDataBox>
@@ -352,7 +365,7 @@ function Profile() {
           </UserDataBox>
         </UserBox>
         <InfoBox>
-          <b>바이든 “격추한 미확인물체 정찰용 아닌 듯…중국에 사과 안 해”</b>
+          <b>{data ? data[0].user.info : ""}</b>
         </InfoBox>
         <BtnBox>
           {!follow ? (
@@ -390,12 +403,12 @@ function Profile() {
           })}{" "}
         </Tab>
         <FeedThumbBox>
-          {thumbItems[activeIdx].map((item, idx) => {
+          {data?.map((item, idx) => {
             return (
               <FeedThumbItem key={idx}>
                 <FeedThumb
                   style={{
-                    backgroundImage: `url(${item})`,
+                    backgroundImage: `url(${item.img})`,
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
                     backgroundSize: "cover",
@@ -408,9 +421,9 @@ function Profile() {
                     icon={isLike[idx] ? Solid.faHeart : faHeart}
                     onClick={onLike}
                   />
-                  {likes[idx]}
+                  {item.likes_count}
                   <FontAwesomeIcon size="lg" icon={faComment} />
-                  {comments[idx]}
+                  {item.reviews_count}
                 </FeedHiddenAction>
               </FeedThumbItem>
             );
